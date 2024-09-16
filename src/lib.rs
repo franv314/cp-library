@@ -11,3 +11,6 @@ pub mod inout;
 
 /// Segment Trees
 pub mod segtree;
+
+/// String utilities
+pub mod string;
