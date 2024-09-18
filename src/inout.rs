@@ -141,7 +141,7 @@ impl<W: Write> OutputWriter<W> {
     ///
     /// assert_eq!(buf, b"123 abc ".to_vec())
     /// ```
-    pub fn put_d<T: Display>(&mut self, val: &T, delim: char) {
+    pub fn put_d<T: Display + ?Sized>(&mut self, val: &T, delim: char) {
         write!(self.writer, "{val}{delim}").expect("Could not print!")
     }
 
@@ -162,7 +162,7 @@ impl<W: Write> OutputWriter<W> {
     ///
     /// assert_eq!(buf, b"abcxyz".to_vec())
     /// ```
-    pub fn put<T: Display>(&mut self, val: &T) {
+    pub fn put<T: Display + ?Sized>(&mut self, val: &T) {
         write!(self.writer, "{val}").expect("Could not print!")
     }
 }

@@ -7,6 +7,8 @@ use std::ops::Add;
 ///
 /// - [`Default`]: which must provide the identity element.
 /// - [`Add`] which must provide the monoid operation.
+
+#[derive(Debug)]
 pub struct SegTree<T> {
     arr: Vec<T>,
     size: usize,
@@ -17,6 +19,9 @@ impl<T> SegTree<T>
 where T: Default + Clone + Add<Output = T>
 {
     /// Builds a segment tree of given `size`, filled with identity elements
+    ///
+    /// Complexity: $\mathcal{O}(N)$ where:
+    /// - $N$ is the size of the segment tree.
     ///
     /// # Examples
     ///
@@ -35,6 +40,9 @@ where T: Default + Clone + Add<Output = T>
     }
 
     /// Builds a segment tree from a slice of `T`.
+    ///
+    /// Complexity: $\mathcal{O}(N)$ additions where:
+    /// - $N$ is the size of the segment tree.
     ///
     /// # Examples
     ///
@@ -62,7 +70,10 @@ where T: Default + Clone + Add<Output = T>
         SegTree { arr, s, size: array.len() }
     }
 
-    /// Perform a range query on the range *[l, r)*.
+    /// Perform a range query on the range $[l, r)$.
+    ///
+    /// Complexity: $\mathcal{O}(\log N)$ additions where:
+    /// - $N$ is the size of the segment tree.
     ///
     /// # Examples
     ///
@@ -83,7 +94,7 @@ where T: Default + Clone + Add<Output = T>
     /// let y = x.query(3, 2);
     /// ```
     pub fn query(&self, l: usize, r: usize) -> T {
-        debug_assert!(0 <= l && l <= r && r <= self.size);
+        debug_assert!(l <= r && r <= self.size);
 
         let mut ans_l: T = Default::default();
         let mut ans_r: T = Default::default();
@@ -106,6 +117,9 @@ where T: Default + Clone + Add<Output = T>
     }
 
     /// Updates the element at `pos` with value `val`
+    ///
+    /// Complexity: $\mathcal{O}(\log N)$ additions where:
+    /// - $N$ is the size of the segment tree.
     ///
     /// # Examples
     ///
@@ -139,7 +153,7 @@ where T: Default + Clone + Add<Output = T>
     /// x.update(2, &4);
     /// ```
     pub fn update(&mut self, pos: usize, val: &T) {
-        debug_assert!(0 <= pos && pos < self.size);
+        debug_assert!(pos < self.size);
 
         let mut pos = pos + self.s;
         self.arr[pos] = val.clone();
