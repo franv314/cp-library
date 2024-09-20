@@ -12,7 +12,6 @@ use std::ops::Add;
 pub struct SegTree<T> {
     arr: Vec<T>,
     size: usize,
-    s: usize,
 }
 
 impl<T> SegTree<T>
@@ -31,12 +30,7 @@ where T: Default + Clone + Add<Output = T>
     /// let x: SegTree<i32> = SegTree::new(10);
     /// ```
     pub fn new(size: usize) -> Self {
-        let mut s = 1;
-        while s <= size {
-            s *= 2;
-        }
-
-        SegTree { arr: vec![Default::default(); 2 * s], size, s }
+        SegTree { arr: vec![Default::default(); 2 * size], size }
     }
 
     /// Builds a segment tree from a slice of `T`.
@@ -52,22 +46,18 @@ where T: Default + Clone + Add<Output = T>
     /// let x = SegTree::from(&[1, 2, 3, 4]);
     /// ```
     pub fn from(array: &[T]) -> Self {
-        let mut s = 1;
-        while s <= array.len() {
-            s *= 2;
-        }
-
-        let mut arr = vec![Default::default(); 2 * s];
+        let size = array.len();
+        let mut arr = vec![Default::default(); 2 * size];
 
         for (i, val) in array.iter().enumerate() {
-            arr[i + s] = val.clone();
+            arr[i + size] = val.clone();
         }
 
-        for i in (1..s).rev() {
+        for i in (1..size).rev() {
             arr[i] = arr[2 * i].clone() + arr[2 * i + 1].clone();
         }
 
-        SegTree { arr, s, size: array.len() }
+        SegTree { arr, size }
     }
 
     /// Perform a range query on the range $[l, r)$.
@@ -99,7 +89,7 @@ where T: Default + Clone + Add<Output = T>
         let mut ans_l: T = Default::default();
         let mut ans_r: T = Default::default();
 
-        let (mut l, mut r) = (l + self.s, r + self.s);
+        let (mut l, mut r) = (l + self.size, r + self.size);
         while l < r {
             if (l & 1) == 1 {
                 ans_l = ans_l + self.arr[l].clone();
@@ -155,7 +145,7 @@ where T: Default + Clone + Add<Output = T>
     pub fn update(&mut self, pos: usize, val: &T) {
         debug_assert!(pos < self.size);
 
-        let mut pos = pos + self.s;
+        let mut pos = pos + self.size;
         self.arr[pos] = val.clone();
 
         while {
