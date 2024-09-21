@@ -14,3 +14,6 @@ pub mod segtree;
 
 /// String utilities
 pub mod string;
+
+/// Binary search utilities
+pub mod binsearch;
