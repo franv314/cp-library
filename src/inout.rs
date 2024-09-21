@@ -165,4 +165,60 @@ impl<W: Write> OutputWriter<W> {
     pub fn put<T: Display + ?Sized>(&mut self, val: &T) {
         write!(self.writer, "{val}").expect("Could not print!")
     }
+
+    /// Writes the elements of the slice `val`, separated by `delim` and with `end`
+    /// after the last element.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use cp_library::inout::OutputWriter;
+    ///
+    /// let mut buf = Vec::new();
+    /// {
+    ///     let mut writer = OutputWriter::new(&mut buf);
+    ///     writer.put_slice_d(&[1, 2, 3], ' ', '\n');
+    /// }
+    ///
+    /// assert_eq!(buf, b"1 2 3\n".to_vec())
+    /// ```
+    pub fn put_slice_d<T: Display>(&mut self, val: &[T], delim: char, end: char) {
+        for i in 0..val.len() {
+            if i < val.len() - 1 {
+                write!(self.writer, "{}{delim}", val[i]).expect("Could not print!");
+            } else {
+                write!(self.writer, "{}{end}", val[i]).expect("Could not print!");
+            }
+        }
+    }
+
+    /// Writes the elements of the slice `val`, separated by `delim`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use cp_library::inout::OutputWriter;
+    ///
+    /// let mut buf = Vec::new();
+    /// {
+    ///     let mut writer = OutputWriter::new(&mut buf);
+    ///     writer.put_slice(&[1, 2, 3], ' ');
+    /// }
+    ///
+    /// assert_eq!(buf, b"1 2 3".to_vec())
+    /// ```
+    pub fn put_slice<T: Display>(&mut self, val: &[T], delim: char) {
+        for i in 0..val.len() {
+            if i < val.len() - 1 {
+                write!(self.writer, "{}{delim}", val[i]).expect("Could not print!");
+            } else {
+                write!(self.writer, "{}", val[i]).expect("Could not print!");
+            }
+        }
+    }
+
+    /// Flushes the writer.
+    pub fn flush(&mut self) {
+        self.writer.flush().expect("Could not flush|");
+    }
 }
