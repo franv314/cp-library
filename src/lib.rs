@@ -17,3 +17,6 @@ pub mod string;
 
 /// Binary search utilities
 pub mod binsearch;
+
+/// Math utilities
+pub mod math;
