@@ -15,7 +15,7 @@ pub struct SegTree<T> {
 }
 
 impl<T> SegTree<T>
-where T: Default + Clone + Add<Output = T>
+    where T: Default + Clone + Add<Output = T>
 {
     /// Builds a segment tree of given `size`, filled with identity elements
     ///

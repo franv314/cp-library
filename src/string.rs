@@ -297,9 +297,7 @@ pub fn lcp<T: Ord>(arr: &[T]) -> (Vec<usize>, Vec<usize>) {
             }
 
             lcp[inv[i] + 1] = k;
-            if k > 0 {
-                k -= 1;
-            }
+            k = k.saturating_sub(1);
         }
     }
 
