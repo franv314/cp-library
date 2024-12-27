@@ -200,12 +200,12 @@ where
     N: BinarySearchable,
     F: Fn(N) -> Option<T>,
 {
-    if predicate(l.clone()).is_none() {
-        return (l, None);
-    }
+    let mut ans = match predicate(l.clone()) {
+        None => return (l, None),
+        x => x,
+    };
 
     let (mut l, mut r) = (l, r);
-    let mut ans = None;
     while !l.close_enough(&r) {
         let m = l.midpoint(&r);
         if let Some(v) = predicate(m.clone()) {
