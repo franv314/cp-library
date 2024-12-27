@@ -69,8 +69,7 @@ impl DBF {
         row[order[0]] = 0;
 
         for i in 1..n {
-            row[order[i]]
-                = row[order[i - 1]] + ((arr[order[i]] != arr[order[i - 1]]) as usize);
+            row[order[i]] = row[order[i - 1]] + ((arr[order[i]] != arr[order[i - 1]]) as usize);
         }
 
         let mut freq = vec![0; n];
@@ -122,14 +121,13 @@ impl DBF {
                 let fst_pair = (last_row[order[i]], last_row[(order[i] + off) % n]);
                 let snd_pair = (last_row[order[i - 1]], last_row[(order[i - 1] + off) % n]);
 
-
                 row[order[i]] = row[order[i - 1]] + ((fst_pair != snd_pair) as usize);
             }
 
             dbf.push(row.clone());
 
             (1 << (dbf.len() - 1)) < n
-        } { }
+        } {}
 
         Self { n, dbf }
     }
@@ -183,7 +181,10 @@ impl DBF {
         debug_assert!(l < r && r <= self.n);
 
         let h = 63 - (r - l).leading_zeros();
-        (self.dbf[h as usize][l], self.dbf[h as usize][(r - (1 << h)) % self.n])
+        (
+            self.dbf[h as usize][l],
+            self.dbf[h as usize][(r - (1 << h)) % self.n],
+        )
     }
 
     /// Compares two substrings $[l_1, r_1)$ and $[l_2, r_2)$

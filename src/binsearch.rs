@@ -17,17 +17,25 @@ pub trait BinarySearchable: Clone {
 macro_rules! impl_binary_search_integral {
     ($type:ty) => {
         impl BinarySearchable for $type {
-            fn midpoint(&self, other: &Self) -> Self { (other + self) / 2 }
-            fn close_enough(&self, other: &Self) -> bool { other - self <= 1 }
+            fn midpoint(&self, other: &Self) -> Self {
+                (other + self) / 2
+            }
+            fn close_enough(&self, other: &Self) -> bool {
+                other - self <= 1
+            }
         }
-    }
+    };
 }
 
 macro_rules! impl_binary_search_floating {
     ($type:ty) => {
         impl BinarySearchable for $type {
-            fn midpoint(&self, other: &Self) -> Self { (other + self) / 2. }
-            fn close_enough(&self, other: &Self) -> bool { other - self <= 1e-6 }
+            fn midpoint(&self, other: &Self) -> Self {
+                (other + self) / 2.
+            }
+            fn close_enough(&self, other: &Self) -> bool {
+                other - self <= 1e-6
+            }
         }
     };
 }
@@ -79,7 +87,7 @@ impl_binary_search_floating!(f64);
 pub fn first_true<F, N>(l: N, r: N, predicate: F) -> N
 where
     N: BinarySearchable,
-    F: Fn(N) -> bool
+    F: Fn(N) -> bool,
 {
     if predicate(l.clone()) {
         return l;
@@ -132,7 +140,7 @@ where
 pub fn first_some<F, N, T>(l: N, r: N, predicate: F) -> (N, Option<T>)
 where
     N: BinarySearchable,
-    F: Fn(N) -> Option<T>
+    F: Fn(N) -> Option<T>,
 {
     if let Some(x) = predicate(l.clone()) {
         return (l, Some(x));
@@ -190,7 +198,7 @@ where
 pub fn first_none<F, N, T>(l: N, r: N, predicate: F) -> (N, Option<T>)
 where
     N: BinarySearchable,
-    F: Fn(N) -> Option<T>
+    F: Fn(N) -> Option<T>,
 {
     if predicate(l.clone()).is_none() {
         return (l, None);

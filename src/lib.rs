@@ -1,5 +1,5 @@
 //! Algorithms and Data Structures for Competitive Programming
-//! 
+//!
 //! Provides standard copy-pasteable implementations of common
 //! algorithms and data structures useful for competitive
 //! programming competitions.
@@ -9,8 +9,8 @@
 /// Utilities for I/O
 pub mod inout;
 
-/// Segment Trees
-pub mod segtree;
+/// Data Structures
+pub mod ds;
 
 /// String utilities
 pub mod string;
