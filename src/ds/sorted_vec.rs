@@ -16,7 +16,7 @@ where
     /// Conversion from an already sorted slice
     ///
     /// Complexity: $\mathcal{O}(N)$ copies where
-    /// - N is the length of the slice
+    /// - $N$ is the length of the slice
     ///
     /// # Examples
     ///
@@ -45,7 +45,7 @@ where
     /// Reduce multiple occurrences of a value to a single one
     ///
     /// Complexity: $\mathcal{O}(N)$ comparisons and copies where
-    /// - N is the length of the sorted vector
+    /// - $N$ is the length of the sorted vector
     ///
     /// # Example
     ///
@@ -73,7 +73,7 @@ where
     /// or the length of the array if none exists.
     ///
     /// Complexity: $\mathcal{O}(\log N)$ comparisons where
-    /// - N is the length of the sorted vector
+    /// - $N$ is the length of the sorted vector
     ///
     /// # Example
     ///
@@ -93,7 +93,7 @@ where
     /// or the length of the array if none exists.
     ///
     /// Complexity: $\mathcal{O}(\log N)$ comparisons where
-    /// - N is the length of the sorted vector
+    /// - $N$ is the length of the sorted vector
     ///
     /// # Example
     ///
@@ -113,7 +113,7 @@ where
 /// Conversion from a `Vec` by sorting its content
 ///
 /// Complexity: $\mathcal{O}(N \log N)$ comparisons where:
-/// - N is the length of the `Vec`
+/// - $N$ is the length of the `Vec`
 ///
 /// # Example
 ///
