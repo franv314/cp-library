@@ -23,7 +23,7 @@ macro_rules! impl_monoid_for_num {
                 self + other
             }
         }
-        
+
         impl Semigroup for $type {}
 
         impl Monoid for $type {

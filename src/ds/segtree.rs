@@ -5,7 +5,7 @@ use std::ops::Index;
 ///
 /// `T` must be [`Clone`] and [`Monoid`]
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct SegTree<T> {
     arr: Vec<T>,
     size: usize,
@@ -13,7 +13,7 @@ pub struct SegTree<T> {
 
 impl<T> SegTree<T>
 where
-    T: Clone + Monoid
+    T: Clone + Monoid,
 {
     /// Builds a segment tree of given `size`, filled with identity elements
     ///
@@ -160,7 +160,9 @@ where
 
 /// Access the elements of the segment tree
 impl<T> Index<usize> for SegTree<T>
-where T: Clone + Monoid {
+where
+    T: Clone + Monoid,
+{
     type Output = T;
 
     /// Accesses the element at position `pos` in the segment tree

@@ -41,7 +41,7 @@ pub fn z_array<T: Eq>(arr: &[T]) -> Vec<usize> {
 /// Cyclic dictionary basic factor of a string over an alphabet `T`.
 ///
 /// `T` must be [`Ord`] to ensure comparability.
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct DBF {
     n: usize,
     dbf: Vec<Vec<usize>>,

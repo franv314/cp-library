@@ -8,12 +8,12 @@ pub trait Magma {
 }
 
 /// A [Semigroup](https://en.wikipedia.org/wiki/Semigroup) must satisfy associativity
-/// 
+///
 /// This is marker trait, used to indicate that a [`Magma`] is associative
 pub trait Semigroup: Magma {}
 
 /// A [Monoid](https://en.wikipedia.org/wiki/Monoid) must have a neutral element.
-/// 
+///
 /// This trait is implemented for all builtin numeric types, with addition as the operation.
 /// Furthermore, if `T` is [`Semigroup`], then [`Option<T>`] is automatically [`Monoid`] with [`None`] as the neutral element.
 pub trait Monoid: Semigroup {
@@ -28,8 +28,8 @@ pub trait Group: Monoid {
 }
 
 /// An [Abelian](https://en.wikipedia.org/wiki/Abelian_group) group must satisfy commutativity
-/// 
+///
 /// This is marker trait, used to indicate that a [`Group`] is commutative
-/// 
+///
 /// This trait is implemented for all signed builtin numeric types, with addition as the operation
 pub trait Abelian: Group {}
