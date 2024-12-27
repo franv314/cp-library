@@ -1,4 +1,5 @@
 use crate::math::algebra::Monoid;
+use std::ops::Index;
 
 /// Basic segment tree over a [monoid](https://en.wikipedia.org/wiki/Monoid) `T`
 ///
@@ -154,5 +155,39 @@ where
         } {
             self.arr[pos] = self.arr[2 * pos].clone().op(self.arr[2 * pos + 1].clone());
         }
+    }
+}
+
+/// Access the elements of the segment tree
+impl<T> Index<usize> for SegTree<T>
+where T: Clone + Monoid {
+    type Output = T;
+
+    /// Accesses the element at position `pos` in the segment tree
+    ///
+    /// Complexity: $\mathcal{O}(1)$
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use cp_library::ds::segtree::SegTree;
+    ///
+    /// let x = SegTree::from(&[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    /// assert_eq!(x[5], 5);
+    /// ```
+    ///
+    /// # Panics
+    ///
+    /// Only in debug builds, if `pos` is not a valid index
+    ///
+    /// ```should_panic
+    /// use cp_library::ds::segtree::SegTree;
+    ///
+    /// let x = SegTree::from(&[0, 1, 2, 3, 4]);
+    /// assert_eq!(x[5], 5);
+    /// ```
+    fn index(&self, pos: usize) -> &Self::Output {
+        debug_assert!(pos < self.size);
+        &self.arr[pos + self.size]
     }
 }
