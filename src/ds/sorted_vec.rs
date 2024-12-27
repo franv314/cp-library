@@ -36,7 +36,7 @@ where
     /// let arr = SortedVec::from_sorted_slice(&[1, 2, 3, 2]);
     /// ```
     pub fn from_sorted_slice(slice: &[T]) -> Self {
-        debug_assert!(slice.is_sorted());
+        debug_assert!(slice.windows(2).all(|w| w[0] <= w[1]));
         Self {
             arr: slice.to_vec(),
         }
