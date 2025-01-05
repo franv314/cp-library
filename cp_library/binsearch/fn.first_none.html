@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Returns the first value in $[l, r)$ for which `predicate` returns `None`, or $r$ if none exists."><title>first_none in cp_library::binsearch - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cp_library" data-themes="" data-resource-suffix="" data-rustdoc-version="1.86.0-nightly (1891c2866 2025-01-04)" data-channel="nightly" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../cp_library/index.html">cp_<wbr>library</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">first_<wbr>none</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In cp_<wbr>library::<wbr>binsearch</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">cp_library</a>::<wbr><a href="index.html">binsearch</a></span><h1>Function <span class="fn">first_none</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/cp_library/binsearch.rs.html#198-220">Source</a> </span></div><pre class="rust item-decl"><code>pub fn first_none&lt;F, N, T&gt;(l: N, r: N, predicate: F) -&gt; (N, <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;)<div class="where">where
+    N: <a class="trait" href="trait.BinarySearchable.html" title="trait cp_library::binsearch::BinarySearchable">BinarySearchable</a>,
+    F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(N) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;,</div></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Returns the first value in $[l, r)$ for which <code>predicate</code> returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="variant core::option::Option::None"><code>None</code></a>,
+or $r$ if none exists.</p>
+<p>Furthermore, it returns <code>predicate(x)</code> for the greatest $x$ for which it is not <code>None</code>,
+or <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="variant core::option::Option::None"><code>None</code></a> if no such $x$ exists.</p>
+<p>This is useful when an explicit construction is needed.</p>
+<p>Conditions: there must exist a value $x_0$ such that <code>predicate(x)</code> return <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some" title="variant core::option::Option::Some"><code>Some</code></a> if
+and only if $x \ge x_0$.</p>
+<p>Complexity: $\mathcal{O}(\log (r - l))$ calls to <code>predicate</code>.</p>
+<h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>cp_library::binsearch::first_none;
+
+<span class="kw">let </span>check = |val| <span class="kw">if </span>val * val &lt; <span class="number">6 </span>{ <span class="prelude-val">Some</span>(val * val) } <span class="kw">else </span>{ <span class="prelude-val">None </span>};
+<span class="kw">let </span>(fst, proof) = first_none(<span class="number">0</span>, <span class="number">15</span>, check);
+
+<span class="macro">assert_eq!</span>(fst, <span class="number">3</span>);
+<span class="macro">assert_eq!</span>(proof, <span class="prelude-val">Some</span>(<span class="number">4</span>));</code></pre></div>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>cp_library::binsearch::first_none;
+
+<span class="kw">let </span>check = |val| <span class="kw">if </span>val * val &lt; <span class="number">6 </span>{ <span class="prelude-val">Some</span>(val * val) } <span class="kw">else </span>{ <span class="prelude-val">None </span>};
+<span class="kw">let </span>(fst, proof) = first_none(<span class="number">5</span>, <span class="number">15</span>, check);
+
+<span class="macro">assert_eq!</span>(fst, <span class="number">5</span>);
+<span class="macro">assert_eq!</span>(proof, <span class="prelude-val">None</span>);</code></pre></div>
+</div></details></section></div></main></body></html>

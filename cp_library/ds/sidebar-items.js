@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["coord_comp","segtree","sorted_vec"]};

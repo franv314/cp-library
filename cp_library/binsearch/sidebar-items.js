@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["first_none","first_some","first_true"],"trait":["BinarySearchable"]};

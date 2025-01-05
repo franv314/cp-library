@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["lcp","suffix_array","z_array"],"struct":["DBF"]};
