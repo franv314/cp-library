@@ -78,13 +78,14 @@ impl DBF {
         while {
             let last_row = &dbf[dbf.len() - 1];
 
-            for i in 0..n {
-                freq[i] = 0;
-            }
+            freq.fill(0);
+
             for v in last_row {
                 freq[*v] += 1;
             }
             let mut acc = 0;
+
+            #[allow(clippy::needless_range_loop)]
             for i in 0..n {
                 acc += freq[i];
                 freq[i] = acc - freq[i];
@@ -97,13 +98,14 @@ impl DBF {
                 freq[elem] += 1;
             }
 
-            for i in 0..n {
-                freq[i] = 0;
-            }
+            freq.fill(0);
             for v in last_row {
                 freq[*v] += 1;
             }
+
             let mut acc = 0;
+
+            #[allow(clippy::needless_range_loop)]
             for i in 0..n {
                 acc += freq[i];
                 freq[i] = acc - freq[i];

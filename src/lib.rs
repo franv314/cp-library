@@ -4,7 +4,7 @@
 //! algorithms and data structures useful for competitive
 //! programming competitions.
 
-#[warn(missing_docs)]
+#![deny(missing_docs)]
 
 /// Utilities for I/O
 pub mod inout;
