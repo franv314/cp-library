@@ -1,3 +1,6 @@
+/// Main-Lorentz algorithm for longest square subsequence
+pub mod main_lorentz;
+
 use std::cmp;
 
 /// Calculate [Z-function](https://cp-algorithms.com/string/z-function.html)
